@@ -1,0 +1,21 @@
+name: Generate iBOM for KiCad PCB
+description: Generates an interactive HTML BOM for the provided KiCad PCB
+
+branding:
+  icon: "file"
+  color: "white"
+
+inputs:
+  pcb:
+    description: ".kicad_pcb to generate iBOM for"
+    required: true
+  output:
+    description: "Location to put generated iBOM (should end in .html)"
+    required: true
+    default: "ibom.html"
+runs:
+  using: "docker"
+  image: "docker://ghcr.io/maartin0/kicad-ibom-action:v1"
+  args:
+    - ${{ inputs.pcb }}
+    - ${{ inputs.output }}
